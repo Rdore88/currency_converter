@@ -17,7 +17,6 @@ class CurrencyAmount
     if currency_code == other.currency_code
       new_amount = amount + other.amount
       return CurrencyAmount.new(new_amount,currency_code)
-
     else
       "Cannot add different currencies"
     end
@@ -41,7 +40,8 @@ class CurrencyAmount
   end
 
   def change_amount(f)
-    @amount = amount * f
+    new_amount = amount * f
+    return CurrencyAmount.new(new_amount, currency_code)
   end
 
 
