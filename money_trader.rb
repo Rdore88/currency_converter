@@ -1,12 +1,14 @@
-require_relative "currency_amount"     # => true
-require_relative "currency_converter"  # => true
+require_relative "currency_amount"
+require_relative "currency_converter"
 
-user_money = CurrencyAmount.new(50.0, "USD")       # => #<CurrencyAmount:0x007fbdbf03a280 @amount=50.0, @currency_code="USD">
-more_user_money = CurrencyAmount.new(25.0, "USD")  # => #<CurrencyAmount:0x007fbdbf039f88 @amount=25.0, @currency_code="USD">
+user_money = CurrencyAmount.new(50.0, "USD")
+more_user_money = CurrencyAmount.new(25.0, "USD")
+jordanian_money = CurrencyAmount.new(30.0, "USD")
 money_trader = CurrencyConverter.new #nothing yet
-final_amount = user_money+(more_user_money)        # => #<CurrencyAmount:0x007fbdbf039998 @amount=75.0, @currency_code="USD">
-puts "$#{final_amount.amount}"                          # => nil
-puts final_amount.currency_code                    # => nil
+final_amount = user_money+(more_user_money)
+puts "currency addition= $#{final_amount.amount}"
+puts final_amount.currency_code
 
-# >> 75.0
-# >> USD
+less_money= user_money - more_user_money
+puts "currency subtraction= $#{less_money.amount}"
+puts less_money.currency_code

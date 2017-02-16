@@ -19,8 +19,19 @@ class CurrencyAmount
       return CurrencyAmount.new(new_amount,currency_code)
 
     else
-      puts "Error"
+      "Error"
     end
   end               # => :+
 
-end  # => :+
+  def -(other)
+    if currency_code == other.currency_code
+        new_amount = amount - other.amount
+      return CurrencyAmount.new(new_amount,currency_code)
+
+    else
+        "Error"
+    end
+
+  end  # => :-
+
+end  # => :-
