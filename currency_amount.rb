@@ -18,7 +18,7 @@ class CurrencyAmount
       new_amount = amount + other.amount
       return CurrencyAmount.new(new_amount,currency_code)
     else
-      "Cannot add different currencies"
+      "Raise error here"
     end
   end
 
@@ -27,7 +27,7 @@ class CurrencyAmount
         new_amount = amount - other.amount
       return CurrencyAmount.new(new_amount,currency_code)
     else
-        "Cannot subtract different currencies"
+      "Raise error here"
     end
   end
 
