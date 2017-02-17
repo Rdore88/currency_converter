@@ -4,19 +4,19 @@ class CurrencyTrader
     @currency_present = currency_present
     @currency_future = currency_future
     @currency_type = currency_type
-  end                                                               # => :initialize
+  end
 
 def currency_present
   @currency_present
-end                   # => :currency_present
+end
 
 def currency_future
   @currency_future
-end                  # => :currency_future
+end
 
 def currency_type
   @currency_type
-end                # => :currency_type
+end
 
 def best_investment(potential_one, potential_two)
   currency_one = currency_present.exchange_rates[currency_type][potential_one] - currency_future.exchange_rates[currency_type][potential_one]
@@ -26,5 +26,5 @@ def best_investment(potential_one, potential_two)
   else
     return potential_two
   end
-  end  # => :best_investment
-end    # => :best_investment
+  end
+end
