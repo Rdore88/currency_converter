@@ -12,4 +12,7 @@ trader was created. This class will tell you what currency will make the best
 investment.
 
 Nightmare: The program will be able to tell you what the best currency investment
-is depending on the amount of years. 
+is depending on the amount of years.
+
+Test: Added tests to confirm that all of the major components of the program
+are working in the money_trader_test file.

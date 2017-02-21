@@ -40,90 +40,94 @@ class MoneyTraderTest < Minitest::Test
     assert_equal 150.0, new_amount.amount
   end
 
-  # def test_currency_converter
-  #   money_trader_present = CurrencyConverter.new(
-  #     {
-  #       "USD" => {
-  #         "JOD" => 0.709,
-  #         "INR" => 67.16
-  #       },
-  #       "JOD" => {
-  #         "USD" => 1.41,
-  #         "INR" => 94.57
-  #       },
-  #       "INR" => {
-  #         "USD" => 0.015,
-  #         "JOD" => 0.0106
-  #       }
-  #     }
-  #   )
-  #
-  # end
-  #
-  # def test_currency_trader
-  #   money_trader_present = CurrencyConverter.new(
-  #     {
-  #       "USD" => {
-  #         "JOD" => 0.709,
-  #         "INR" => 67.16
-  #       },
-  #       "JOD" => {
-  #         "USD" => 1.41,
-  #         "INR" => 94.57
-  #       },
-  #       "INR" => {
-  #         "USD" => 0.015,
-  #         "JOD" => 0.0106
-  #       }
-  #     }
-  #   )
-  #   money_trader_future = CurrencyConverter.new({
-  #                                         "1 Year" => {
-  #                                           "USD" => {
-  #                                             "JOD" => 0.609,
-  #                                             "INR" => 84.32
-  #                                           },
-  #                                           "JOD" => {
-  #                                             "USD" => 2.33,
-  #                                             "INR" => 112.45
-  #                                           },
-  #                                           "INR" => {
-  #                                             "USD" => 0.009,
-  #                                             "JOD" => 0.0074
-  #                                           }
-  #                                         },
-  #                                         "5 Years" => {
-  #                                           "USD" => {
-  #                                             "JOD" => 0.509,
-  #                                             "INR" => 90.32
-  #                                           },
-  #                                           "JOD" => {
-  #                                             "USD" => 2.78,
-  #                                             "INR" => 120.45
-  #                                           },
-  #                                           "INR" => {
-  #                                             "USD" => 0.008,
-  #                                             "JOD" => 0.0064
-  #                                           }
-  #                                         },
-  #                                         "10 Years" => {
-  #                                           "USD" => {
-  #                                             "JOD" => 0.909,
-  #                                             "INR" => 60.32
-  #                                           },
-  #                                           "JOD" => {
-  #                                             "USD" => 1.04,
-  #                                             "INR" => 85.76
-  #                                           },
-  #                                           "INR" => {
-  #                                             "USD" => 0.011,
-  #                                             "JOD" => 0.02
-  #                                           }
-  #                                         },
-  #                                       }
-  #                                       )
-  #   trader = CurrencyTrader.new(money_trader_present, money_trader_future, "USD")
-  #
-  # end
+  def test_money_exchange_currency_converter
+    money_trader_present = CurrencyConverter.new(
+      {
+        "USD" => {
+          "JOD" => 0.709,
+          "INR" => 67.16
+        },
+        "JOD" => {
+          "USD" => 1.41,
+          "INR" => 94.57
+        },
+        "INR" => {
+          "USD" => 0.015,
+          "JOD" => 0.0106
+        }
+      }
+    )
+    jordanian_money = CurrencyAmount.new(30.0, "JOD")
+    jod_to_usd = money_trader_present.money_exchange(jordanian_money, "USD")
+    assert_equal 42.3, jod_to_usd.amount
+    assert_equal "USD", jod_to_usd.currency_code
+  end
+
+  def test_currency_trader
+    money_trader_present = CurrencyConverter.new(
+      {
+        "USD" => {
+          "JOD" => 0.709,
+          "INR" => 67.16
+        },
+        "JOD" => {
+          "USD" => 1.41,
+          "INR" => 94.57
+        },
+        "INR" => {
+          "USD" => 0.015,
+          "JOD" => 0.0106
+        }
+      }
+    )
+    money_trader_future = CurrencyConverter.new({
+                                          "1 Year" => {
+                                            "USD" => {
+                                              "JOD" => 0.609,
+                                              "INR" => 84.32
+                                            },
+                                            "JOD" => {
+                                              "USD" => 2.33,
+                                              "INR" => 112.45
+                                            },
+                                            "INR" => {
+                                              "USD" => 0.009,
+                                              "JOD" => 0.0074
+                                            }
+                                          },
+                                          "5 Years" => {
+                                            "USD" => {
+                                              "JOD" => 0.509,
+                                              "INR" => 90.32
+                                            },
+                                            "JOD" => {
+                                              "USD" => 2.78,
+                                              "INR" => 120.45
+                                            },
+                                            "INR" => {
+                                              "USD" => 0.008,
+                                              "JOD" => 0.0064
+                                            }
+                                          },
+                                          "10 Years" => {
+                                            "USD" => {
+                                              "JOD" => 0.909,
+                                              "INR" => 60.32
+                                            },
+                                            "JOD" => {
+                                              "USD" => 1.04,
+                                              "INR" => 85.76
+                                            },
+                                            "INR" => {
+                                              "USD" => 0.011,
+                                              "JOD" => 0.02
+                                            }
+                                          },
+                                        }
+                                        )
+    trader = CurrencyTrader.new(money_trader_present, money_trader_future, "USD")
+    investment = trader.best_investment("JOD", "INR", "5 Years")
+    assert_equal "JOD", investment
+  end
 
 end

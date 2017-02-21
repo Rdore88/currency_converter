@@ -2,6 +2,9 @@ require_relative "currency_amount"
 require_relative "currency_converter"
 require_relative "currency_trader"
 require_relative "error"
+require "minitest/autorun"
+require "minitest/pride"
+require "minitest/focus"
 
 user_money = CurrencyAmount.new(50.0, "USD")
 check_money_equals = CurrencyAmount.new(50.0, "USD")
@@ -17,6 +20,11 @@ puts "currency subtraction= $#{less_money.amount}"
 begin
 p money_error = user_money + jordanian_money
 rescue DifferentCurrencyCodeError
+  # puts e.message
+  # puts e.class
+  # puts e.backtrace
+# ensure
+#   puts "fix this code"
 end
 p user_money == jordanian_money
 p user_money == check_money_equals

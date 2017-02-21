@@ -25,22 +25,21 @@ class CurrencyAmount
   def +(other)
     if currency_code == other.currency_code
       new_amount = amount + other.amount
-      return CurrencyAmount.new(new_amount,currency_code)
-    else
-      raise DifferentCurrencyCodeError
+      return CurrencyAmount.new(new_amount, currency_code)
     end
+      raise DifferentCurrencyCodeError
   end
 
   def -(other)
      if currency_code == other.currency_code
       new_amount = amount - other.amount
       return CurrencyAmount.new(new_amount, currency_code)
-    raise DifferentCurrencyCodeError
     end
+    raise DifferentCurrencyCodeError
   end
 
   def ==(other)
-    if currency_code == other.currency_code
+    if currency_code == other.currency_code && amount == other.amount
       true
     else
       false
